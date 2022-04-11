@@ -1,0 +1,4 @@
+{
+    "MongoURL": "mongodb://<URI>:27017/Hokm",
+    "MongoOpt": {}
+}

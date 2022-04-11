@@ -1,0 +1,39 @@
+{
+  "name": "celestial-back-end",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mohamadnosratian/celestial-back-end.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mohamadnosratian/celestial-back-end/issues"
+  },
+  "homepage": "https://github.com/mohamadnosratian/celestial-back-end#readme",
+  "dependencies": {
+    "axios": "latest",
+    "bcryptjs": "latest",
+    "connect-mongo": "latest",
+    "cookie-parser": "latest",
+    "cors": "latest",
+    "express": "latest",
+    "express-http-proxy": "latest",
+    "express-session": "latest",
+    "jalali-date": "latest",
+    "mongoose": "latest",
+    "multer": "latest",
+    "passport": "latest",
+    "passport-cookie": "latest",
+    "passport-local": "latest"
+  },
+  "devDependencies": {
+    "nodemon": "latest"
+  }
+}
