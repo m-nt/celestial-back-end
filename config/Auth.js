@@ -6,9 +6,9 @@ module.exports = {
     return next();
   },
   IsAuthenticated: (req, res, next) => {
-    if (req.isAuthenticated()) {
+    if (req.isAuthenticated() && req.user.role == "admin") {
       return next();
     }
-    res.send({ message: "You are not logged in !", code: "nok" });
+    res.send({ message: "You are not alowed!", code: "nok" });
   },
 };

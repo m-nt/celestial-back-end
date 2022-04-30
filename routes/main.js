@@ -7,10 +7,36 @@ const {
   getMerkleRootHash,
   RemoveFromWhitelist,
   AddToWhitelist,
+  TOTAL_CELESTIAL,
 } = require("../tools/utils");
 const { IsAuthenticated } = require("../config/Auth");
 const Excluded = require("../models/Excluded");
 const router = express.Router();
+
+router.delete("/resetexcludes", upload.none(), IsAuthenticated, (req, res) => {
+  Excluded.find({})
+    .then((list) => {
+      let obj = { 1: TOTAL_CELESTIAL };
+      if (list.length > 0) {
+        Excluded.findOneAndUpdate({ _id: list[0]._id }, { excludeJson: obj })
+          .then((res) => {
+            return res.send({ message: "Exclude List has been reset", code: "ok" });
+          })
+          .catch((err) => {
+            return res.send({ message: err, code: "nok" });
+          });
+      }
+    })
+    .catch((err) => {
+      return res.send({ message: err, code: "nok" });
+    });
+});
+
+router.post("/getmerkleroot", upload.none(), IsAuthenticated, (req, res) => {
+  getMerkleRootHash(_address, (merkleProof) => {
+    return res.send({ message: "merkle root hash:", code: "ok", merkleProof: merkleProof });
+  });
+});
 
 router.post("/getmerkleproof", upload.none(), (req, res) => {
   const { _address } = req.body;

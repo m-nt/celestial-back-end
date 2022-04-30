@@ -83,8 +83,8 @@ function getMerkleRootHash(callback) {
   Whitelist.find({})
     .then((adresses) => {
       let obj = [];
-      if (addresses.length > 0) {
-        obj = address[0].list;
+      if (adresses.length > 0) {
+        obj = adresses[0].list;
       }
       const leafNode = obj.map((addr) => keccak256(addr));
       const merkleTree = new MerkleTree(leafNode, keccak256, { sortPairs: true });
