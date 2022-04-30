@@ -11,7 +11,22 @@ const {
 } = require("../tools/utils");
 const { IsAuthenticated } = require("../config/Auth");
 const Excluded = require("../models/Excluded");
+const Whitelist = require("../models/Whitelist");
 const router = express.Router();
+
+router.post("/getwhitelists", upload.none(), IsAuthenticated, (req, res) => {
+  Whitelist.find({})
+    .then((list) => {
+      let obj = [];
+      if (list.length > 0) {
+        obj = list[0].list;
+      }
+      return res.send({ message: "Whitelist: ", whitelist: obj, code: "ok" });
+    })
+    .catch((err) => {
+      return res.send({ message: err, code: "nok" });
+    });
+});
 
 router.delete("/resetexcludes", upload.none(), IsAuthenticated, (req, res) => {
   Excluded.find({})
