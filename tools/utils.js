@@ -47,7 +47,6 @@ function RemoveFromWhitelist(_address, callback) {
         obj = list[0].list;
         index = obj.indexOf(_address);
         obj.splice(index, 1);
-        console.log(`obj:${obj} - index:${index}`);
         Whitelist.findByIdAndUpdate({ _id: list[0]._id }, { list: obj }).catch((err) => {
           console.log(err);
         });
