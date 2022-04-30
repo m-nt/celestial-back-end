@@ -31,7 +31,9 @@
     "multer": "latest",
     "passport": "latest",
     "passport-cookie": "latest",
-    "passport-local": "latest"
+    "passport-local": "latest",
+    "keccak256": "latest",
+    "merkletreejs": "latest"
   },
   "devDependencies": {
     "nodemon": "latest"

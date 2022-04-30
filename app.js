@@ -45,6 +45,7 @@ app.use(passport.session());
 
 //Routes set up
 //app.use("/users", require("./routes/user"));
-//app.use("/pay", require("./routes/pay"));
+app.use("/api", require("./routes/main"));
+app.use("/auth", require("./routes/User"));
 
 app.listen(PORT, console.log(`app listening on port:${PORT}`));

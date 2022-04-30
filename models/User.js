@@ -9,38 +9,6 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  Avatar: {
-    data: Buffer,
-    contentType: String,
-  },
-  Curency: {
-    type: Number,
-    required: true,
-    default: 100,
-  },
-  DeviceInfo: {
-    type: String,
-    required: false,
-  },
-  DeckOfCard: {
-    type: Number,
-    required: true,
-    default: 0,
-  },
-  Background: {
-    type: Number,
-    required: true,
-    default: 404,
-  },
-  Status: {
-    type: String,
-    enum: ["OFFLINE", "ONLINE", "AWAIT"],
-    default: "OFFLINE",
-  },
-  Debt: {
-    type: Number,
-    default: 0,
-  },
   token: {
     type: String,
     default: "",

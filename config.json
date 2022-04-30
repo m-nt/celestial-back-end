@@ -1,0 +1,4 @@
+{
+    "MongoURL": "mongodb://mongodb:27017/CelestialVerse",
+    "MongoOpt": {}
+}
