@@ -155,15 +155,15 @@ function UpdateExclude(key, random, callback) {
       }
 
       if (result.length > 0) {
-        Excluded.findOne({ excludeJson: result[0].excludeJson })
-          .then((res) => {
-            if (res) {
-              callback(false);
-            }
-          })
-          .catch((err) => {
-            console.log(err);
-          });
+        // Excluded.findOne({ excludeJson: result[0].excludeJson })
+        //   .then((res) => {
+        //     if (res) {
+        //       callback(false);
+        //     }
+        //   })
+        //   .catch((err) => {
+        //     console.log(err);
+        //   });
         Excluded.findOneAndUpdate({ _id: result[0]._id }, { excludeJson: obj })
           .then((res) => {
             callback(true);
