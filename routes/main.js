@@ -40,6 +40,8 @@ router.delete("/resetexcludes", upload.none(), IsAuthenticated, (req, res) => {
           .catch((err) => {
             return res.send({ message: err, code: "nok" });
           });
+      } else {
+        return res.send({ message: "Exclude List has been reset", code: "ok" });
       }
     })
     .catch((err) => {
