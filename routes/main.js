@@ -103,7 +103,6 @@ router.post("/requesttoken", upload.none(), (req, res) => {
   let celestialTypes = 0;
   //for (let i = 0; i < qty; i++) {
   GenRandomToken((tokenId, celestialType) => {
-    if (tokenId) {
       tokenIds = tokenId;
       celestialTypes = celestialType;
       //if (i == qty - 1) {
@@ -116,10 +115,8 @@ router.post("/requesttoken", upload.none(), (req, res) => {
           celestialType: celestialTypes,
           merkleProof: merkleProof,
         });
-      });
-    } else {
-      return res.send({ message: "Resulted with Error", code: "nok" });
-    }
+      }); 
+    
     //}
   });
   //}
