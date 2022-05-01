@@ -4,12 +4,10 @@ const keccak256 = require("keccak256");
 // DB MODELS
 const Excluded = require("../models/Excluded");
 const Whitelist = require("../models/Whitelist");
-const { json } = require("express/lib/response");
-const { findOneAndUpdate } = require("../models/Excluded");
 
 // CONSTANT
-const TOTAL_CELESTIAL = 17;
-const CELESTIAL_TYPES = { 1: 10, 2: 15, 3: 16 };
+const TOTAL_CELESTIAL = 10001;
+const CELESTIAL_TYPES = { 1: 8000, 2: 9950, 3: 10000 };
 
 function AddToWhitelist(_address, callback) {
   Whitelist.find({})
