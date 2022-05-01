@@ -50,7 +50,7 @@ router.delete("/resetexcludes", upload.none(), IsAuthenticated, (req, res) => {
 });
 
 router.post("/getmerkleroot", upload.none(), IsAuthenticated, (req, res) => {
-  getMerkleRootHash(_address, (merkleProof) => {
+  getMerkleRootHash( (merkleProof) => {
     return res.send({ message: "merkle root hash:", code: "ok", merkleProof: merkleProof });
   });
 });
