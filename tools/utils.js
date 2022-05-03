@@ -109,13 +109,8 @@ function GenRandomToken(callback) {
       let max = Number(obj[min]);
       let tokenId = Math.floor(Math.random() * (max - min) + min);
       let celestialType = GetType(tokenId);
-      UpdateExclude(min, tokenId, (res) => {
-        if (res) {
-          callback(tokenId, celestialType);
-        } else {
-          callback(null, null);
-        }
-      });
+      callback(tokenId, celestialType);
+
     })
     .catch((err) => {
       console.log(err);
@@ -132,7 +127,12 @@ function GetType(tokenId) {
   }
 }
 
-function UpdateExclude(key, random, callback) {
+function GetChunkByTokenId(tokenId,obj){
+  let filtered = Object.entries(obj).filter(([key,value])=>tokenId >= key && tokenId < value)
+  return filtered[0]
+}
+
+function UpdateExclude(tokenId, callback) {
   Excluded.find({})
     .then((result) => {
       let obj = {};
@@ -141,32 +141,27 @@ function UpdateExclude(key, random, callback) {
       } else {
         obj[1] = TOTAL_CELESTIAL;
       }
-      let value = Number(obj[key]);
+      let chunk = GetChunkByTokenId(tokenId,obj)
+      let [key,value] = chunk;
+      key = Number(key)
+      value = Number(value)
       delete obj[key];
 
-      if (random - key > 0) {
-        obj[key] = random;
+      if (tokenId - key > 0) {
+        obj[key] = tokenId;
       }
-      if (value - (random + 1) > 0) {
-        obj[random + 1] = value;
+      if (value - (tokenId + 1) > 0) {
+        obj[tokenId + 1] = value;
       }
 
       if (result.length > 0) {
-        // Excluded.findOne({ excludeJson: result[0].excludeJson })
-        //   .then((res) => {
-        //     if (res) {
-        //       callback(false);
-        //     }
-        //   })
-        //   .catch((err) => {
-        //     console.log(err);
-        //   });
         Excluded.findOneAndUpdate({ _id: result[0]._id }, { excludeJson: obj })
           .then((res) => {
             callback(true);
           })
           .catch((err) => {
             console.log(err);
+            callback(false)
           });
       } else {
         const exclude = new Excluded({
@@ -176,7 +171,7 @@ function UpdateExclude(key, random, callback) {
       }
     })
     .catch((err) => {
-      console.log(err);
+      callback(false)
     });
 }
 
@@ -187,4 +182,5 @@ module.exports = {
   TOTAL_CELESTIAL,
   AddToWhitelist,
   RemoveFromWhitelist,
+  UpdateExclude
 };

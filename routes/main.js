@@ -7,12 +7,45 @@ const {
   getMerkleRootHash,
   RemoveFromWhitelist,
   AddToWhitelist,
+  UpdateExclude,
   TOTAL_CELESTIAL,
 } = require("../tools/utils");
 const { IsAuthenticated } = require("../config/Auth");
 const Excluded = require("../models/Excluded");
 const Whitelist = require("../models/Whitelist");
 const router = express.Router();
+
+
+router.put("/updateexclude",upload.none(),(req,res)=>{
+  let {tokenId} = req.body;
+  if (!tokenId) {
+    return res.send({ message: "You have to send me tokenId!", code: "nok" });
+  }
+  try {
+    tokenId = Number(tokenId)
+  } catch (error) {
+    return res.send({ message: "tokenId must be Number!", code: "nok" });
+  }
+  Excluded.find({})
+  .then((list) => {
+    let obj = { 1: TOTAL_CELESTIAL };
+    if (list.length > 0) {
+      obj = list[0].list;
+      UpdateExclude(tokenId,(res)=>{
+        if (res) {
+          return res.send({ message: "Chunk has been Updated", code: "ok" });
+        }else{
+          return res.send({ message: "error happend in db", code: "ok" });
+        }
+      })
+    } else {
+      return res.send({ message: "List is empty", code: "nok" });
+    }
+  })
+  .catch((err) => {
+    return res.send({ message: err, code: "nok" });
+  });
+})
 
 router.post("/getwhitelists", upload.none(), IsAuthenticated, (req, res) => {
   Whitelist.find({})
