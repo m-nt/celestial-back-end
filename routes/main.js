@@ -31,8 +31,8 @@ router.put("/updateexclude",upload.none(),(req,res)=>{
     let obj = { 1: TOTAL_CELESTIAL };
     if (list.length > 0) {
       obj = list[0].list;
-      UpdateExclude(tokenId,(res)=>{
-        if (res) {
+      UpdateExclude(tokenId,(result)=>{
+        if (result) {
           return res.send({ message: "Chunk has been Updated", code: "ok" });
         }else{
           return res.send({ message: "error happend in db", code: "ok" });
