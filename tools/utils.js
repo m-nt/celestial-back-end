@@ -85,8 +85,8 @@ function getMerkleRootHash(callback) {
       }
       const leafNode = obj.map((addr) => keccak256(addr));
       const merkleTree = new MerkleTree(leafNode, keccak256, { sortPairs: true });
-      const rootHash = merkleTree.getRoot();
-      callback(rootHash);
+      //const rootHash = merkleTree.getRoot();
+      callback(merkleTree.toString());
     })
     .catch((err) => {
       callback(null);
